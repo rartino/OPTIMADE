@@ -46,6 +46,13 @@ Vector image can be inserted from an image folder.
 
 .. image:: images/flowchart.svg
    :width: 15%
+   :align: center
+
+   .. _flowchart:
+
+   Here goes the figure caption.
+   
+This is a `link to the figure <flowchart>`_.
 
 Inline Code
 -----------
