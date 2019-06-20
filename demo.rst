@@ -18,9 +18,9 @@ General API Requirements and Conventions
 ========================================
 Bla bla
 
-Base URL
---------
-This is an unordered list
+Lists
+-----
+This is an itemized list
 
 - One
 - Two
@@ -31,6 +31,19 @@ This is an unordered list
   
 - Three
 - Four  
+
+This is an enumerated list
+
+#. Item one
+
+#. Item two
+
+#. Item three
+
+#. Item four
+
+Images
+------
 
 Example section from OPTiMaDe spec
 ----------------------------------
