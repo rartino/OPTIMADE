@@ -243,6 +243,177 @@ Appendix 1: Database-Provider-Specific Namespace Prefixes
 
 Appendix 2: The Filter Language EBNF Grammar
 --------------------------------------------
+.. code:: EBNF
+
+  (* BEGIN EBNF GRAMMAR Filter *)
+  (* The top-level 'filter' rule: *)
+
+  Filter = [Spaces], Expression ;
+
+  (* Values *)
+
+  Constant = String | Number ;
+
+  Value = String | Number | Property ;
+  (* Note: support for Property in Value is OPTIONAL *)
+
+  ValueList = [ Operator ], Value, { Comma, [ Operator ], Value } ;
+  (* Support for Operator in ValueList is OPTIONAL *)
+
+  ValueZip = [ Operator ], Value, Colon, [ Operator ], Value, {Colon, [ Operator ], Value} ;
+  (* Support for Operator in ValueZip is OPTIONAL *)
+
+  ValueZipList = ValueZip, { Comma, ValueZip } ;
+
+  (* Expressions *)
+
+  Expression = ExpressionClause, [ OR, Expression ] ;
+
+  ExpressionClause = ExpressionPhrase, [ AND, ExpressionClause ] ;
+
+  ExpressionPhrase = [ NOT ], ( Comparison | PredicateComparison | OpeningBrace, Expression, ClosingBrace );
+
+  Comparison = ConstantFirstComparison |
+             PropertyFirstComparison ;
+  (* Note: support for ConstantFirstComparison is OPTIONAL *)
+
+  PropertyFirstComparison = Property, ( 
+                ValueOpRhs |
+                KnownOpRhs |
+                FuzzyStringOpRhs |
+                SetOpRhs | 
+                SetZipOpRhs );
+  (* Note: support for SetZipOpRhs in Comparison is OPTIONAL *)
+
+  ConstantFirstComparison = Constant, ValueOpRhs ;
+				
+  PredicateComparison = LengthComparison ;
+
+  ValueOpRhs = Operator, Value ;
+
+  KnownOpRhs = IS, ( KNOWN | UNKNOWN ) ; 
+
+  FuzzyStringOpRhs = CONTAINS, String | STARTS, [ WITH ], String | ENDS, [ WITH ], String ;
+
+  SetOpRhs = HAS, ( [ Operator ], Value | ALL, ValueList | EXACTLY, ValueList | ANY, ValueList | ONLY, ValueList ) ;
+  (* Note: support for ONLY in SetOpRhs is OPTIONAL *)
+  (* Note: support for [ Operator ] in SetOpRhs is OPTIONAL *)
+
+  SetZipOpRhs = PropertyZipAddon, HAS, ( ValueZip | ONLY, ValueZipList | ALL, ValueZipList | EXACTLY, ValueZipList | ANY, ValueZipList ) ;
+
+  LengthComparison = LENGTH, Property, Operator, Value ;
+
+  PropertyZipAddon = Colon, Property, {Colon, Property} ;
+
+  (* Property *)
+
+  Property = Identifier, { Dot, Identifier } ;
+
+  (* TOKENS *)
+
+  (* Separators: *)
+
+  OpeningBrace = '(', [Spaces] ;
+  ClosingBrace = ')', [Spaces] ;
+
+  Dot = '.', [Spaces] ;
+  Comma = ',', [Spaces] ;
+  Colon = ':', [Spaces] ;
+
+  (* Boolean relations: *)
+
+  AND = 'A', 'N', 'D', [Spaces] ;
+  NOT = 'N', 'O', 'T', [Spaces] ;
+  OR = 'O', 'R', [Spaces] ;
+
+  IS = 'I', 'S', [Spaces] ;
+  KNOWN = 'K', 'N', 'O', 'W', 'N', [Spaces] ;
+  UNKNOWN = 'U', 'N', 'K', 'N', 'O', 'W', 'N', [Spaces] ;
+
+  CONTAINS = 'C', 'O', 'N', 'T', 'A', 'I', 'N', 'S', [Spaces] ;
+  STARTS = 'S', 'T', 'A', 'R', 'T', 'S', [Spaces] ;
+  ENDS = 'E', 'N', 'D', 'S', [Spaces] ;
+  WITH = 'W', 'I', 'T', 'H', [Spaces] ;
+
+  LENGTH = 'L', 'E', 'N', 'G', 'T', 'H', [Spaces] ;
+  HAS = 'H', 'A', 'S', [Spaces] ;
+  ALL = 'A', 'L', 'L', [Spaces] ;
+  ONLY = 'O', 'N', 'L', 'Y', [Spaces] ;
+  EXACTLY = 'E', 'X', 'A', 'C', 'T', 'L', 'Y', [Spaces] ;
+  ANY = 'A', 'N', 'Y', [Spaces] ;
+
+  (* OperatorComparison operator tokens: *)
+
+  Operator = ( '<', [ '=' ] | '>', [ '=' ] | '=' | '!', '=' ), [Spaces] ;
+
+  (* Property syntax *)
+
+  Identifier = LowercaseLetter, { LowercaseLetter | Digit }, [Spaces] ;
+
+  Letter = UppercaseLetter | LowercaseLetter ;
+
+  UppercaseLetter =
+      'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' |
+      'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' |
+      'Y' | 'Z'
+  ;
+
+  LowercaseLetter =
+      'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 
+      'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' |
+      'y' | 'z' | '_'
+  ;
+
+  (* Strings: *)
+
+  String = '"', { EscapedChar }, '"', [Spaces] ;
+
+  EscapedChar = UnescapedChar | '\', '"' | '\', '\' ;
+
+  UnescapedChar = Letter | Digit | Space | Punctuator | UnicodeHighChar ;
+
+  Punctuator =
+      '!' | '#' | '$' | '%' | '&' | "'" | '(' | ')' | '*' | '+' | ',' |
+      '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' |
+      ']' | '^' | '`' | '{' | '|' | '}' | '~'
+  ;
+
+  (* BEGIN EBNF GRAMMAR Number *)
+  (* Number token syntax: *)
+
+  Number = [ Sign ] ,
+           ( Digits, [ '.', [ Digits ] ] | '.' , Digits ),
+           [ Exponent ], [Spaces] ;
+
+  Exponent =  ( 'e' | 'E' ) , [ Sign ] , Digits ;
+
+  Sign = '+' | '-' ;
+
+  Digits =  Digit, { Digit } ;
+
+  Digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' ;
+
+  (* White-space: *)
+
+  (* Special character tokens: *)
+
+  tab = ? \t ?;
+  nl  = ? \n ?;
+  cr  = ? \r ?;
+  vt  = ? \v ?;
+  ff  = ? \f ?;
+
+  Space = ' ' | tab | nl | cr | vt | ff ;
+
+  Spaces = Space, { Space } ;
+
+  (* The 'UnicodeHighChar' specifies all Unicode characters above 0x7F;
+     the syntax used is the one compatible with Grammatica: *)
+
+  UnicodeHighChar = ? [^\x00-\x7F] ? ;
+ 
+  (* END EBNF GRAMMAR Number *)
+  (* END EBNF GRAMMAR Filter *)
 
 Appendix 3: The Regular Expressions to Check OPTiMaDe Number Syntax
 -------------------------------------------------------------------
