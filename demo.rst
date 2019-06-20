@@ -2,8 +2,12 @@
 Specification RST example
 =========================
 
-.. role:: jsonc(code)
-   :language: jsonc
+.. role:: json(code)
+   :language: json
+
+.. role:: optimade-filter(code)
+   :language: optimade-filter
+
 
 .. sectnum::
 
@@ -26,7 +30,7 @@ This is an itemized list
 - Three
 - Four  
 
-This is an enumerated list
+This is an auto-enumerated list
 
 #. Item one
 
@@ -38,31 +42,28 @@ This is an enumerated list
 
 Images
 ------
-Vector image inserted from an image folder.
+Vector image can be inserted from an image folder.
 
 .. image:: images/flowchart.svg
    :width: 15%
 
-Code
-----
-Here is some text with an `inline literal without format specifier` 
-and some inline json :jsonc:`{'json':'syntax highligh', 'cucumber':42}` ullamco laboris 
-nisi ut aliquip ex ea commodo consequat. 
-
-
-
+Inline Code
+-----------
+Regular inline literals `inline literal without format specifier` 
+inline literal marked as json :json:`{'hello':'data', 'cucumber':42}` and
+inline literal marked as optimade filter :optimade-filter:`a > b AND C:D HAS ANY 5:"x", 7:"y", 3:"z"`
 
 Comments
 --------
 
-There is text below here in the source document, which isn't rendered.
+We can have comments in the source file which are not rendered. 
 
 .. This text will not be shown
 
 Notes
 -----
 
-Regular text.
+We can use indented blocks for, e.g., implementors notes.
 
   **Note**: all databases should implement OPTiMaDe.
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
@@ -83,6 +84,7 @@ Regular text.
 
 Tables
 ------
+Tables are about as simple/difficult as in markdown.
 
 +------------+------------+-----------+
 | Header 1   | Header 2   | Header 3  |
@@ -110,20 +112,14 @@ True   True   True
 Footnotes and citations
 -----------------------
 
-This is a text with a footnote reference [#]_.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-nisi ut aliquip ex ea commodo consequat. [#]_.
+We can use auto-numbered footnotes that render further down. [#]_.
+Here is another one [#]_.
 
 .. [#] Footnote 1.
 .. [#] Footnote 2.
 
-Citation references, like [CIT1]_.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-nisi ut aliquip ex ea commodo consequat. [CIT2]_. One can also
+We can use citation references, like [CIT1]_.
+And another one [CIT2]_. One can also
 do an in-text citation like CIT1_.
 
 .. [CIT1] A citation
@@ -131,18 +127,16 @@ do an in-text citation like CIT1_.
 
 Term Definition
 ===============
+There is a specific format for doing term definitions.
+
 cucumber
   This is the definition of a cucumber
 
 banana
   A banana is a yellow fruit.
 
-General API Requirements and Conventions
-========================================
-Bla bla
-
-Example section from OPTiMaDe spec
-----------------------------------
+Example section from real OPTiMaDe spec
+---------------------------------------
 "Entry listing" endpoint response dictionaries MUST have a `data`
 key. The value of this key MUST be a list containing dictionaries that
 represent individual entries. In the JSON API format every dictionary
