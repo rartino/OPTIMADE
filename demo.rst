@@ -137,6 +137,8 @@ banana
 
 Includes
 --------
+Includes of other files exist in RST, but are disabled for github rendering, so we probably shouldn't use them.
+
 .. include:: includes/include_demo.rst
 
 
