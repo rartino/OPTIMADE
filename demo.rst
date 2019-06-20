@@ -55,7 +55,7 @@ MUST have the following fields:
   in case it changes in the future.
 
   Database-provider-specific properties need to include the database-provider-specific prefix
-  (see `Appendix 1`_).
+  (see `Appendix 1: Database-Provider-Specific Namespace Prefixes`_).
 
 OPTIONALLY it can also contains the following fields:
 
@@ -68,7 +68,7 @@ OPTIONALLY it can also contains the following fields:
   non-standard meta-information about the object
   
 * **relationships**: a dictionary containing references to other resource objects as defined in
-  [6.6. Relationships Used by Multiple Entry Types](#h.6.6)
+  `Responses`_
 
 Example:
 
