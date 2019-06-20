@@ -32,22 +32,22 @@ This is an unordered list
 - Three
 - Four  
 
-JSON API Response Schema
-------------------------
+Example section from OPTiMaDe spec
+----------------------------------
 "Entry listing" endpoint response dictionaries MUST have a `data`
 key. The value of this key MUST be a list containing dictionaries that
 represent individual entries. In the JSON API format every dictionary
-([resource object](http://jsonapi.org/format/1.0/#document-resource-objects))
+`resource object <http://jsonapi.org/format/1.0/#document-resource-objects>`_
 MUST have the following fields:
 
-* **type**: field containing the Entry type as defined in section [2. Term Definition](#h.2)
-* **id**: field containing the ID of entry as defined in section [2. Term Definition](#h.2).
+* **type**: field containing the Entry type as defined in section `Responses`_
+* **id**: field containing the ID of entry as defined in section `Responses`_.
   This can be the local database ID.
 * **attributes**: a dictionary, containing key-value pairs representing the
   entry's properties and the following fields:
   
   * **local\_id**: the entry's local database ID (having no OPTiMaDe requirements/conventions)
-  * **last\_modified**: an [ISO 8601](https://www.iso.org/standard/40874.html)
+  * **last\_modified**: an `ISO 8601 <https://www.iso.org/standard/40874.html>`_
     representing the entry's last modification time
   * **immutable\_id**: an OPTIONAL field containing the entry's immutable ID (e.g., an UUID).
   This is important for databases having preferred IDs that point to "the latest version" of a
@@ -55,16 +55,16 @@ MUST have the following fields:
   in case it changes in the future.
 
   Database-provider-specific properties need to include the database-provider-specific prefix
-  (see [Appendix 1](#h.app1)).
+  (see `Appendix 1`_).
 
 OPTIONALLY it can also contains the following fields:
 
-* **links**: a [JSON API links object](http://jsonapi.org/format/1.0/#document-links) can OPTIONALLY
+* **links**: a `JSON API links object <http://jsonapi.org/format/1.0/#document-links>`_ can OPTIONALLY
   contain the field
   
   * **self**: the entry's URL
   
-* **meta**: a [JSON API meta object](https://jsonapi.org/format/1.0/#document-meta) that contains
+* **meta**: a `JSON API meta object <https://jsonapi.org/format/1.0/#document-meta>`_ that contains
   non-standard meta-information about the object
   
 * **relationships**: a dictionary containing references to other resource objects as defined in
