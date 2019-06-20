@@ -2,21 +2,15 @@
 Specification RST example
 =========================
 
+.. role:: jsonc(code)
+   :language: jsonc
+
 .. sectnum::
 
 .. contents::
 
-Introduction
-============
-Bla bla.
-
-Term Definition
-===============
-Bla bla.
-
-General API Requirements and Conventions
-========================================
-Bla bla
+Example markup
+==============
 
 Lists
 -----
@@ -44,6 +38,108 @@ This is an enumerated list
 
 Images
 ------
+Vector image inserted from an image folder.
+
+.. image:: images/flowchart.svg
+   :width: 15%
+
+Code
+----
+Here is some text with an `inline literal without format specifier` 
+and some inline json :jsonc:`{'json':'syntax highligh', 'cucumber':42}` ullamco laboris 
+nisi ut aliquip ex ea commodo consequat. 
+
+
+
+
+Comments
+--------
+
+There is text below here in the source document, which isn't rendered.
+
+.. This text will not be shown
+
+Notes
+-----
+
+Regular text.
+
+  **Note**: all databases should implement OPTiMaDe.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+  enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+  nisi ut aliquip ex ea commodo consequat. 
+  
+  Embeded itemized list
+  
+  * Item 1
+  * Item 2
+  * Item 3
+  
+  Duis aute irure dolor 
+  in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+  nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+  sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Tables
+------
+
++------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  |
++============+============+===========+
+| body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+| body row 2 | Cells may span columns.|
++------------+------------+-----------+
+| body row 3 | Cells may  | - Cells   |
++------------+ span rows. | - contain |
+| body row 4 |            | - blocks. |
++------------+------------+-----------+
+
+=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+
+Footnotes and citations
+-----------------------
+
+This is a text with a footnote reference [#]_.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+nisi ut aliquip ex ea commodo consequat. [#]_.
+
+.. [#] Footnote 1.
+.. [#] Footnote 2.
+
+Citation references, like [CIT1]_.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+nisi ut aliquip ex ea commodo consequat. [CIT2]_. One can also
+do an in-text citation like CIT1_.
+
+.. [CIT1] A citation
+.. [CIT2] Another citation
+
+Term Definition
+===============
+cucumber
+  This is the definition of a cucumber
+
+banana
+  A banana is a yellow fruit.
+
+General API Requirements and Conventions
+========================================
+Bla bla
 
 Example section from OPTiMaDe spec
 ----------------------------------
