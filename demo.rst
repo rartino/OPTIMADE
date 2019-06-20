@@ -112,11 +112,11 @@ True   True   True
 Footnotes and citations
 -----------------------
 
-We can use auto-numbered footnotes that render further down. [#]_.
-Here is another one [#]_.
+We can use auto-numbered footnotes that render further down. [#one]_.
+Here is another one [#two]_. And we then refer to [#one]_ again.
 
-.. [#] Footnote 1.
-.. [#] Footnote 2.
+.. [#one] Footnote 1.
+.. [#two] Footnote 2.
 
 We can use citation references, like [CIT1]_.
 And another one [CIT2]_. One can also
@@ -134,6 +134,11 @@ cucumber
 
 banana
   A banana is a yellow fruit.
+
+Includes
+--------
+.. include:: includes/include_demo.rst
+
 
 Example section from real OPTiMaDe spec
 ---------------------------------------
