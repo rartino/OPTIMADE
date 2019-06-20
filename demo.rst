@@ -114,6 +114,16 @@ False  True   True
 True   True   True
 =====  =====  ======
 
+Links
+-----
+
+There can be links to sections in the document like this: `Links`_. 
+They can of course have `customized text <Links_>`_.
+
+.. _target:
+
+One can define own anchor links at `arbitary places as well <target_>`_.
+
 Footnotes and citations
 -----------------------
 
@@ -130,8 +140,8 @@ do an in-text citation like CIT1_.
 .. [CIT1] A citation
 .. [CIT2] Another citation
 
-Term Definition
-===============
+Term Definitions
+----------------
 There is a specific format for doing term definitions.
 
 cucumber
