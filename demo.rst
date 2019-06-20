@@ -8,7 +8,6 @@ Specification RST example
 .. role:: optimade-filter(code)
    :language: optimade-filter
 
-
 .. sectnum::
 
 .. contents::
@@ -49,9 +48,9 @@ Vector image can be inserted from an image folder.
    :align: center
    :name: flowchart
    
-   This is a the figure caption.
+   This is the caption of the figure.
    
-This is a link to the figure `flowchart`_.
+This is a link to the figure named flowchart_. The link text `can be customized <flowchart_>`_.
 
 Inline Code
 -----------
