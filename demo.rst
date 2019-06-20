@@ -228,28 +228,20 @@ Example:
     // ...
   }
 
-Responses
----------
+Example headlines to fill out the table of contents
+---------------------------------------------------
 Bla bla
 
-Response Format
-...............
+Another level of headlines
+..........................
 Bla bla
   
-Database-Provider-Specific Namespace Prefixes
-=============================================
-
-The Filter Language EBNF Grammar
-================================
-
-The Regular Expressions to Check OPTiMaDe Number Syntax
-=======================================================
-
 Appendicies
 ===========
 
 Appendix 1: Database-Provider-Specific Namespace Prefixes
 ---------------------------------------------------------
+Bla bla.
 
 Appendix 2: The Filter Language EBNF Grammar
 --------------------------------------------
@@ -427,4 +419,4 @@ Appendix 2: The Filter Language EBNF Grammar
 
 Appendix 3: The Regular Expressions to Check OPTiMaDe Number Syntax
 -------------------------------------------------------------------
-
+Bla bla.
