@@ -54,9 +54,9 @@ This is a link to the figure named flowchart_. The link text `can be customized 
 
 Inline Code
 -----------
-Regular inline literals `inline literal without format specifier` 
+Here is an ``inline literal without format specifier``, here is an 
 inline literal marked as json :json:`{'hello':'data', 'cucumber':42}` and
-inline literal marked as optimade filter :optimade-filter:`a > b AND C:D HAS ANY 5:"x", 7:"y", 3:"z"`
+here is an inline literal marked as optimade filter :optimade-filter:`a > b AND C:D HAS ANY 5:"x", 7:"y", 3:"z"`
 
 Comments
 --------
