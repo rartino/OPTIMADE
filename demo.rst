@@ -51,7 +51,7 @@ Vector image can be inserted from an image folder.
    
    This is a the figure caption.
    
-This is a `link to the figure <flowchart>`_.
+This is a link to the figure `flowchart`_.
 
 Inline Code
 -----------
