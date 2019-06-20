@@ -165,8 +165,8 @@ represent individual entries. In the JSON API format every dictionary
 `resource object <http://jsonapi.org/format/1.0/#document-resource-objects>`_
 MUST have the following fields:
 
-* **type**: field containing the Entry type as defined in section `Responses`_
-* **id**: field containing the ID of entry as defined in section `Responses`_.
+* **type**: field containing the Entry type as defined in section `Term Definitions`_
+* **id**: field containing the ID of entry as defined in section `Term Definitions`_.
   This can be the local database ID.
 * **attributes**: a dictionary, containing key-value pairs representing the
   entry's properties and the following fields:
@@ -193,7 +193,7 @@ OPTIONALLY it can also contains the following fields:
   non-standard meta-information about the object
   
 * **relationships**: a dictionary containing references to other resource objects as defined in
-  `Responses`_
+  `Term Definitions`_
 
 Example:
 
