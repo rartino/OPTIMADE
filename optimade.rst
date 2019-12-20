@@ -1261,11 +1261,15 @@ Implementations MUST support comparisons on the form::
     identifier <operator> constant
     constant <operator> identifier
 
-Where 'identifier' is a property name and 'constant' is either a numerical or string type constant. However, implementations MAY support comparisons with identifiers also on both sides, and comparisons with values on both sides, i.e., on the forms::
+Where 'identifier' is a property name and 'constant' is either a numerical or string type constant.
+
+However, implementations MAY support comparisons with identifiers also on both sides, and comparisons with Numeric values on both sides, i.e., on the forms::
 
     identifier <operator> identifier
     constant <operator> constant
 
+However, the latter form, `constant <operator> constant` where the constants are Strings MUST return the error :http-error:`501 Not Implemented`. The reason is that filter language Strings can be interpreted as more than one data type, and thus this construct is not unambigous. The OPTiMaDe specification will aim to address this issue in a future version.
+    
 Examples:
 
 - :filter:`nelements > 3`
