@@ -87,6 +87,10 @@ We can use indented blocks for, e.g., implementors notes.
   nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
   sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+.. note:: This is a paragraph
+
+   - Here is a bullet list.
+
 Tables
 ------
 Tables are about as simple/difficult as in markdown.
