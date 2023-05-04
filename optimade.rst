@@ -450,8 +450,8 @@ How these are communicated in the response depend on the response format.
 For the JSON response format, the resource object metadata field is used, see `JSON Response Schema: Common Fields`_.
 
 The metadata property is a dictionary of format specified by the field :field:`x-optimade-metadata-definition` in the Property Definition of the field, see `Property Definitions`_.
-Database providers are allowed to define their own metadata properties in :field:`x-optimade-metadata-definition`, but the MUST use the database-specific prefix even for metadata for database-specific fields.
-For example, the metadata property definition of the field :field:`_exmpl_example_field` MUST NOT define a metadata field named, e.g., :field:`accuracy`, but rather need to be name the field, e.g., :field:`_exmpl_accuracy`.
+Database providers are allowed to define their own metadata properties in :field:`x-optimade-metadata-definition`, but they MUST use the database-specific prefix even for metadata for database-specific fields.
+For example, the metadata property definition of the field :field:`_exmpl_example_field` MUST NOT define a metadata field named, e.g., :field:`accuracy`; the field rather needs to be named, e.g., :field:`_exmpl_accuracy`.
 The reason for this limitation is to avoid name collisions with standard metadata fields defined by the OPTIMADE standard that apply also to database-specific data fields.
 
 If an implementation supports the metadata field, it SHOULD return the metadata field whenever the property to which the metadata field belongs is returned.
@@ -493,7 +493,7 @@ Example of a response using the JSON response format with two structure entries 
        // ...
      }
 
-Example of the corresponding metadata property definition for :field:`element_ratios` to place in the field :field:`x-optimade-metadata-definition` in the property definition of :field:`element_ratios`:
+Example of the corresponding metadata property definition to be placed in the field :field:`x-optimade-metadata-definition` in the property definition of :field:`element_ratios`:
 
     .. code:: jsonc
          // ...
