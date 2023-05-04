@@ -442,42 +442,62 @@ For example, the following query can be sent to API implementations `exmpl1` and
 
 :filter:`filter=_exmpl1_band_gap<2.0 OR _exmpl2_band_gap<2.5`
 
-Per property metadata fields
-----------------------------
+Metadata properties
+-------------------
 
-Implementations are allowed to specify an OPTIONAL field containing per entry metadata for a property.
-The name of the metadata field consists of the name of the property for which it contains the metadata, suffixed with "_meta".
-For example, when the field is :property:`cartesian_site_positions` the metadata field would be :field:`cartesian_site_positions_meta`.
+A metadata property represents property-specific metadata for each entry.
+How these are communicated in the response depend on the response format.
+For the JSON response format, the resource object metadata field is used, see `JSON Response Schema: Common Fields`_.
 
-This metadata field consists of a dictionary which MAY contain database specific fields.
+The metadata property is a dictionary of format specified by the field :field:`x-optimade-metadata-definition` in the Property Definition of the field, see `Property Definitions`_.
+Database providers are allowed to define their own metadata properties in :field:`x-optimade-metadata-definition`, but the MUST use the database-specific prefix even for metadata for database-specific fields.
+For example, the metadata property definition of the field :field:`_exmpl_example_field` MUST NOT define a metadata field named, e.g., :field:`accuracy`, but rather need to be name the field, e.g., :field:`_exmpl_accuracy`.
+The reason for this limitation is to avoid name collisions with standard metadata fields defined by the OPTIMADE standard that apply also to database-specific data fields.
+
 If an implementation supports the metadata field, it SHOULD return the metadata field whenever the property to which the metadata field belongs is returned.
 
-The metadata fields and their subfields should be described in the property definitions as described in the section `property definitions`_ just as regular fields.
-If a subfield is present in multiple metadata fields, these subfields should have a separate entry under each of these metadata fields.
-The subfields SHOULD have the same value for the :field:`$id` field if the :field:`$id` field is present and the subfields are otherwise identical.
-In addition to the fields described in the section `property definitions`_, the property definition of a metadata field SHOULD have the key:
+Example of a response using the JSON response format with two structure entries that each include a metadata property for the :field:`element_ratios`:
 
-- **x-optimade-metadata-for**: This key contains a string with the name of the property for which this metadata property contains the metadata.
-  It MUST be located at the top level of the property definition.
+.. code:: jsonc
 
-Example of a returned metadata field:
-
-    .. code:: jsonc
-
-       {
-         "element_ratios":[0.33336, 0.22229, 0.44425],
-         "element_ratios_meta": {
-           "_exmpl_confidence_interval": [[0.33325,0.33347],[0.22190,0.22268],[0.44392,0.44458]],
-           "_exmpl_confidence_level": 0.95,
+     {
+       "data": [
+         {
+           "type": "structures",
+           "id": "example.db:structs:0001",
+           "attributes": {
+             "element_ratios":[0.33336, 0.22229, 0.44425],
+           },
+           "meta": {
+             "element_ratios": {
+               "_exmpl_confidence_interval": [[0.33325,0.33347],[0.22190,0.22268],[0.44392,0.44458]],
+               "_exmpl_confidence_level": 0.95
+             }
+           }
+         },
+         {
+           "type": "structures",
+           "id": "example.db:structs:1234",
+           "attributes": {
+             "element_ratios":[0.5, 0.5],
+           },
+           "meta": {
+             "element_ratios": {
+               "_exmpl_confidence_interval": [[0.6,0.4],[0.7,0.4]],
+               "_exmpl_confidence_level": 0.90
+             }
+           }
          }
-         //...
-       }
+         // ...
+       ]
+       // ...
+     }
 
-Example of the property definition of a metadata field:
+Example of the corresponding metadata property definition for :field:`element_ratios` to place in the field :field:`x-optimade-metadata-definition` in the property definition of :field:`element_ratios`:
 
     .. code:: jsonc
-        {
-         "element_ratios_meta": {
+         // ...
+         "x-optimade-metadata-definition": {
            "$id": "https://properties.example.com/v1.2.0/element_ratios_meta",
            "title": "Metadata for the element_ratios field",
            "x-optimade-metadata-for": "element_ratios",
@@ -517,7 +537,7 @@ Example of the property definition of a metadata field:
              }
            }
          }
-       }
+         // ...
 
 Responses
 =========
@@ -669,6 +689,8 @@ Every response SHOULD contain the following fields, and MUST contain at least :f
 
 - **data**: The schema of this value varies by endpoint, it can be either a *single* `JSON API resource object <http://jsonapi.org/format/1.0/#document-resource-objects>`__ or a *list* of JSON API resource objects.
   Every resource object needs the :field:`type` and :field:`id` fields, and its attributes (described in section `API Endpoints`_) need to be in a dictionary corresponding to the :field:`attributes` field.
+  Each resource object MAY contain a :field:`meta` field used to communicate `Metadata properties`_.
+  The keys of the :field:`meta` field give the names of the data fields in :field:`attributes` they provide metadata for and the corresponding values are metadata property objects.
 
 The response MAY also return resources related to the primary data in the field:
 
@@ -1946,6 +1968,12 @@ A Property Definition MUST be composed according to the combination of the requi
     - :field:`uri`: String.
       A URI of the external resource (which MAY be a resolvable URL).
 
+**OPTIONAL keys for the outermost level of the Property Definition:**
+
+- :field:`x-optimade-metadata-definition`: Dictionary.
+  A dictionary that is itself a property definition which defines the format of the metadata dictionary for this field.
+  The :field:`x-optimade-metadata-definition` field SHOULD not include another :field:`x-optimade-metadata-definition` field.
+
 **REQUIRED keys for all levels of the Property Definition:**
 
 - :field:`x-optimade-type`: String
@@ -2384,7 +2412,6 @@ database-provider-specific properties
     Implementations are thus allowed to decide that some of these properties are part of what can be seen as the default value of :query-param:`response_fields` when that query parameter is omitted.
     Implementations SHOULD NOT include database-provider-specific properties when the query parameter :query-param:`response_fields` is present but does not list them.
   - These MUST be prefixed by a database-provider-specific prefix (see appendix `Database-Provider-Specific Namespace Prefixes`_).
-  - The suffix ``_meta`` is reserved for properties that contain metadata, as described in the section `Per property metadata fields`_ and MUST not be used for fields that do not follow the guidelines described there.
   - Implementations MUST add the properties to the list of :property:`properties` under the respective entry listing :endpoint:`info` endpoint (see `Entry Listing Info Endpoints`_).
 
 - **Examples**: A few examples of valid database-provided-specific property names follows:
