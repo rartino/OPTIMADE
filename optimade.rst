@@ -690,7 +690,7 @@ Every response SHOULD contain the following fields, and MUST contain at least :f
 - **data**: The schema of this value varies by endpoint, it can be either a *single* `JSON API resource object <http://jsonapi.org/format/1.0/#document-resource-objects>`__ or a *list* of JSON API resource objects.
   Every resource object needs the :field:`type` and :field:`id` fields, and its attributes (described in section `API Endpoints`_) need to be in a dictionary corresponding to the :field:`attributes` field.
   Each resource object MAY contain a :field:`meta` field used to communicate `Metadata properties`_.
-  The keys of the :field:`meta` field give the names of the data fields in :field:`attributes` they provide metadata for and the corresponding values are metadata property objects.
+  The keys of the :field:`meta` field are the names of the respective data fields in :field:`attributes` that they provide metadata for, and the corresponding values are metadata property objects.
 
 The response MAY also return resources related to the primary data in the field:
 
@@ -1014,7 +1014,8 @@ OPTIONALLY it can also contain the following fields:
 
   - **self**: the entry's URL
 
-- **meta**: a `JSON API meta object <https://jsonapi.org/format/1.0/#document-meta>`__ that contains non-standard meta-information about the object.
+- **meta**: a `JSON API meta object <https://jsonapi.org/format/1.0/#document-meta>`__ that is used to communicate `Metadata properties`_.
+  The keys of the :field:`meta` field are the names of the respective data fields in :field:`attributes` that they provide metadata for, and the corresponding values are metadata property objects.
 
 - **relationships**: a dictionary containing references to other entries according to the description in section `Relationships`_ encoded as `JSON API Relationships <https://jsonapi.org/format/1.0/#document-resource-object-relationships>`__.
   The OPTIONAL human-readable description of the relationship MAY be provided in the :field:`description` field inside the :field:`meta` dictionary of the JSON API resource identifier object.
