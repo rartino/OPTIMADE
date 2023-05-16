@@ -449,7 +449,7 @@ A metadata property represents property-specific metadata for a given entry.
 How these are communicated in the response depends on the response format.
 For the JSON response format, the resource object metadata field, :field:`meta`, is used, see `JSON Response Schema: Common Fields`_.
 
-The metadata property is a dictionary of format specified by the field :field:`x-optimade-metadata-definition` in the Property Definition of the field, see `Property Definitions`_.
+The metadata property is a dictionary in the format specified by the field :field:`x-optimade-metadata-definition` in the Property Definition of the field, see `Property Definitions`_.
 Database providers are allowed to define their own metadata properties in :field:`x-optimade-metadata-definition`, but they MUST use the database-specific prefix even for metadata for database-specific fields.
 For example, the metadata property definition of the field :field:`_exmpl_example_field` MUST NOT define a metadata field named, e.g., :field:`accuracy`; the field rather needs to be named, e.g., :field:`_exmpl_accuracy`.
 The reason for this limitation is to avoid name collisions with standard metadata fields defined by the OPTIMADE standard that apply also to database-specific data fields.
@@ -493,7 +493,7 @@ Example of a response using the JSON response format with two structure entries 
        // ...
      }
 
-Example of the corresponding metadata property definition to be placed in the field :field:`x-optimade-metadata-definition` in the property definition of :field:`element_ratios`:
+Example of the corresponding metadata property definition contained in the field :field:`x-optimade-metadata-definition` which is placed in the property definition of :field:`element_ratios`:
 
     .. code:: jsonc
          // ...
@@ -1972,7 +1972,7 @@ A Property Definition MUST be composed according to the combination of the requi
 **OPTIONAL keys for the outermost level of the Property Definition:**
 
 - :field:`x-optimade-metadata-definition`: Dictionary.
-  A dictionary that is itself a property definition which defines the format of the metadata dictionary for this field.
+  A dictionary that is itself a property definition, which defines the format of the metadata dictionary for this field.
   The :field:`x-optimade-metadata-definition` field SHOULD not include another :field:`x-optimade-metadata-definition` field.
 
 **REQUIRED keys for all levels of the Property Definition:**
